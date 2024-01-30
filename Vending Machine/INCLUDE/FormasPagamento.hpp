@@ -2,24 +2,26 @@
 
 template <typename T>
 
-class FormasDePagamento {
-  private:
-    std::string nome;
-    std::function<bool(const T&)> verifica_pagamento;
-    std::function<void(T&)> receber_pagamento;
+class FormasDePagamento
+{
+private:
+  std::string name;
+  std::function<bool(const T &)> verifyPayment;
+  std::function<void(T &)> getPayment;
 
-  public:
-    FormasDePagamento(std::string nome_pagamento, 
-                      std::function<bool(const T&)> verificar_pagamento,
-                      std::function<void(T&)> receber_pagamento_pagamento)
-        : nome(nome_pagamento), verifica_pagamento(verificar_pagamento),
-          receber_pagamento(receber_pagamento_pagamento) {}
+public:
+  FormasDePagamento(std::string namePayment,
+                    std::function<bool(const T &)> verifyPayment,
+                    std::function<void(T &)> getPayment)
+      : name(name_payment), verifyPayment(verify_payment),
+        getPayment(get_payment) {}
 
-    std::string obter_nome() const {
-        return nome;
-    }
-        
-    inline bool pode_processar_pagamento(const T& pagamento) const {return verifica_pagamento(pagamento);}
+  std::string getname() const
+  {
+    return nome;
+  }
 
-    inline void processar_pagamento(T& pagamento) const {receber_pagamento(pagamento);}
+  inline bool can_payment_process(const T &payment) const { return verify_payment(payment); }
+
+  inline void payment_process(T &payment) const { get_payment(payment); }
 };
