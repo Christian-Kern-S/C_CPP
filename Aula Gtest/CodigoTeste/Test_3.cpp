@@ -16,6 +16,14 @@ public:
     inline int getValue() { return baseValue; }
 };
 
+struct MyClassTest : public testing::Test
+{
+
+    MyClass *mc;
+    inline void SetUp() { mc = new MyClass(100); }
+    inline void TearDown() { delete mc; }
+};
+
 TEST(ClassTest, Increment_by_5)
 {
 
