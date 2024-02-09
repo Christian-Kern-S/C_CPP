@@ -30,7 +30,8 @@ public:
         queue->enqueue(data);
     }
 
-    int getData(){
+    int getData()
+    {
         return queue->dequeue();
     }
 
@@ -47,7 +48,8 @@ TEST(GMockTests, CanAddData)
     dh.addData(1);
 }
 
-TEST(GMockTests, CanAddGetData){
+TEST(GMockTests, CanAddGetData)
+{
     MockQueue myMockObj;
     DataHolder dh(&myMockObj);
     EXPECT_CALL(myMockObj, enqueue(1));
