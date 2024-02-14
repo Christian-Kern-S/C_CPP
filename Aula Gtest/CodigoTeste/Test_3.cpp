@@ -24,21 +24,21 @@ struct MyClassTest : public testing::Test
     inline void TearDown() { delete mc; }
 };
 
-TEST_F(MyClassTest, Increment_by_5){
-    //Act
-    mc -> Increment(5);
-    //Assert
-    ASSERT_EQ(mc ->getValue(),105);
-
+TEST_F(MyClassTest, Increment_by_5)
+{
+    // Act
+    mc->Increment(5);
+    // Assert
+    ASSERT_EQ(mc->getValue(), 105);
 }
 
 TEST_F(MyClassTest, Increment_by_10)
 {
     // Act
-    mc -> Increment(10);
+    mc->Increment(10);
 
     // Assert
-    EXPECT_EQ(mc -> getValue(), 110);
+    EXPECT_EQ(mc->getValue(), 110);
 }
 
 int main(int argc, char **argv)
