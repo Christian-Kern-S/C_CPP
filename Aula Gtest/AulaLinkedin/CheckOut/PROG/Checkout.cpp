@@ -1,4 +1,4 @@
-#include "Checkout.h"
+#include "../INCLUDE/Checkout.h"
 
 Checkout::Checkout() : total(0)
 {

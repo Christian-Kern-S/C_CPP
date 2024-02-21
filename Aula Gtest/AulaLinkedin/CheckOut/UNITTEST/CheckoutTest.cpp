@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include "Checkout.h"
+#include "../INCLUDE/Checkout.h"
 
 using namespace std;
 
