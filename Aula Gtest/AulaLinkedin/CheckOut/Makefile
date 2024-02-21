@@ -36,8 +36,5 @@ tree:
 	$(ECHO) Showing Tree
 	tree .
 
-run:
-	$(ECHO) Rodando...
-
 clean:
 	rm ./obj/* $(LIB)/*
