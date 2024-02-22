@@ -1,12 +1,20 @@
+#----------- VARIABLES -----------
 ECHO=echo -e
 PROG = ./PROG
+F_PROG = $(PROG)/*.cpp
 UNITTEST = ./UNITTEST
+F_UNITTEST = $(UNITTEST)/*.cpp
 INCLUDE = ./INCLUDE
+F_INCLUDE = $(INCLUDE)/*.h
 OBJ = ./obj
 LIB = ./lib
 
+#-----------FLAGS -----------
+
 LIBS = -lcompile -L $(LIB)
 FLAGS = -O3 -Wall 
+
+#----------- CODE -----------
 
 all: compile test
 
@@ -19,18 +27,18 @@ build: $(OBJ)/Checkout.o
 
 test:
 	$(ECHO) Testing...
-	g++ $(UNITTEST)/CheckoutTest.cpp $(PROG)/Checkout.cpp -lgtest -lgtest_main -pthread
+	g++ $(F_UNITTEST) $(F_PROG) -lgtest -lgtest_main -pthread
 	./a.out
 
+#----------- TEMPLATE -----------
 
 $(OBJ)/%.o: $(PROG)/%.cpp $(INCLUDE)/%.h
-	$(ECHO) Compiling...
 	gcc $(FLAGS) -c $< $(LIBS) -I $(INCLUDE) -o $@
 
 $(OBJ)/%.o: $(UNITTEST)/%.cpp
-	$(ECHO) Compiling...
 	gcc $(FLAGS) -c $< -o $@
-	
+
+#----------- TEMPLATE -----------
 
 tree: 
 	$(ECHO) Showing Tree
