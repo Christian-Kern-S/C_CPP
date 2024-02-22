@@ -24,7 +24,7 @@ struct MyClassTest : public testing::Test
     inline void TearDown() { delete mc; }
 };
 
-TEST_F(MyClassTest, Increment_by_5)
+TEST_F(MyClassTest, Increment_by_5_3)
 {
     // Act
     mc->Increment(5);
@@ -32,7 +32,7 @@ TEST_F(MyClassTest, Increment_by_5)
     ASSERT_EQ(mc->getValue(), 105);
 }
 
-TEST_F(MyClassTest, Increment_by_10)
+TEST_F(MyClassTest, Increment_by_10_3)
 {
     // Act
     mc->Increment(10);
@@ -41,9 +41,3 @@ TEST_F(MyClassTest, Increment_by_10)
     EXPECT_EQ(mc->getValue(), 110);
 }
 
-int main(int argc, char **argv)
-{
-    testing::InitGoogleTest(&argc, argv);
-
-    return RUN_ALL_TESTS();
-}

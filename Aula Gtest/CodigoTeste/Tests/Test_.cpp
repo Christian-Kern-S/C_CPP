@@ -3,7 +3,7 @@
 
 using namespace std;
 
-TEST( Testname, Increment_by_5 ){
+TEST( Testname, Increment_by_5_ ){
 
     // EXPECT_GT(3,2);
     // EXPECT_EQ(1,1);
@@ -20,7 +20,7 @@ TEST( Testname, Increment_by_5 ){
 
 }
 
-TEST( Testname, Increment_by_10 ){
+TEST( Testname, Increment_by_10_ ){
 
     // EXPECT_GT(3,2);
     // EXPECT_EQ(1,1);
@@ -43,9 +43,4 @@ TEST( Testname, Increment_by_10 ){
 
 // }
 
-int main(int argc, char **argv)
-{
-    testing::InitGoogleTest(&argc, argv);
 
-    return RUN_ALL_TESTS();
-}

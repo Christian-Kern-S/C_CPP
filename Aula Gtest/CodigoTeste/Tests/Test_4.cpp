@@ -47,8 +47,3 @@ TEST_F(stackTest, PopTest)
         ASSERT_EQ(s1.pop(), lastPoppedValue--);
 }
 
-int main(int argc, char **_argv)
-{
-    testing::InitGoogleTest(&argc, _argv);
-    return RUN_ALL_TESTS();
-}

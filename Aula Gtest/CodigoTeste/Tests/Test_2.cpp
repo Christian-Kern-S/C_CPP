@@ -14,7 +14,7 @@ public:
 
 };
 
-TEST(Testname, Increment_by_5)
+TEST(Testname, Increment_by_5_2)
 {
 
     // Arrange
@@ -27,9 +27,4 @@ TEST(Testname, Increment_by_5)
     EXPECT_STREQ(value.c_str(), "root");
 }
 
-int main(int argc, char **argv)
-{
-    testing::InitGoogleTest(&argc, argv);
 
-    return RUN_ALL_TESTS();
-}
