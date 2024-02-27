@@ -10,7 +10,7 @@ public:
     Checkout();
     virtual ~Checkout();
 
-    void addItemPrice(std::string item, int price);
+    inline void addItemPrice(const std::string item, int price) {prices[item] = price;}
     void addItem(std::string item);
     void addDiscount(std::string item, int nbrOfItems, int discountPrice);
     int calculateTotal();

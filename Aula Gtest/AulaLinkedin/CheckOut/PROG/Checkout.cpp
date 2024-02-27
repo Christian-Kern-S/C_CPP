@@ -8,11 +8,6 @@ Checkout::~Checkout()
 {
 }
 
-void Checkout::addItemPrice(std::string item, int price)
-{
-    prices[item] = price;
-}
-
 void Checkout::addItem(std::string item)
 {
     std::map<std::string, int>::iterator priceIter = prices.find(item);
@@ -49,8 +44,7 @@ int Checkout::calculateTotal()
 void Checkout::calculateItem(std::string item, int itemCnt)
 {
 
-    std::map<std::string, Discount>::iterator discountIter;
-    discountIter = discounts.find(item);
+    std::map<std::string, Discount>::iterator discountIter = discounts.find(item);
     if (discountIter != discounts.end())
     {
         Discount discount = discountIter->second;
