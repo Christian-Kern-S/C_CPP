@@ -5,7 +5,7 @@ OBJ = ./obj
 LIB = ./lib
 TESTS = ./Tests
 FILES = $(TESTS)/*.cpp 
-FILES_O = $(OBJ)/Test_.o $(OBJ)/Test_2.o $(OBJ)/Test_3.o $(OBJ)/Test_4.o
+FILES_O = $(OBJ)/main.o $(OBJ)/Test_.o $(OBJ)/Test_2.o $(OBJ)/Test_3.o $(OBJ)/Test_4.o
 
 TEST_FILE ?= Test_.cpp
 
