@@ -6,11 +6,10 @@
 #include "IAccount.hpp"
 #include "Bank.hpp"
 
-
 class Container
 {
 public:
-    void addAccount(AccountType type);
+    bool addAccount(AccountType type);
     AccountType getTypeById(int id);
     IAccount* getAccountByID(int id);
     int setID(int id);

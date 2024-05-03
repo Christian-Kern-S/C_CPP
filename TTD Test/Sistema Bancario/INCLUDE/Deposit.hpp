@@ -10,7 +10,7 @@ public:
     Deposit(Container& container) : _container(container)
     {
     }
-    void deposit(int id,double value);
+    bool deposit(int id,double value);
 
 private:
     Container& _container;

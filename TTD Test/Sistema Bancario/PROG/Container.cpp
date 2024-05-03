@@ -24,10 +24,15 @@ AccountType Container::getTypeById(int id)
     return AccountType::INVALID;
 }
 
-void Container::addAccount(AccountType type)
+bool Container::addAccount(AccountType type)
 {   
-    _accounts[i] = bank.create(type);
-    i++;
+    if(type == AccountType::LEGAL || type == AccountType::PHYSICAL)
+    {
+        _accounts[i] = bank.create(type);
+        i++;
+        return 1;
+    }
+    return 0;
 }
 
 double Container::getBalanceById(int id)

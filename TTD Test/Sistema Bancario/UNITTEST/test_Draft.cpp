@@ -1,19 +1,19 @@
 #include <gtest/gtest.h>
 #include "../INCLUDE/Draft.hpp"
-
+#include "../INCLUDE/Deposit.hpp"
 #include <iostream>
 
 class test_Draft : public Draft, public ::testing::Test
 {
 public:
-    test_Draft() : Draft(myContainer), _deposit(myContainer), myContainer(){}
+    test_Draft() : Draft(myContainer), _deposit(myContainer){}
     void Test_addAccount(AccountType type)
     {
         myContainer.addAccount(type);
     }
     void Test_deposit(int id, double value)
     {
-        _deposit.deposit(2,300);
+        _deposit.deposit(id,value);
     }
     double Test_getBalanceById(int id)
     {

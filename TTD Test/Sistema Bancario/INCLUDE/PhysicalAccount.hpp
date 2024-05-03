@@ -10,7 +10,6 @@ public:
     {
         setName("Physical Account");
     }
-    std::string inputPhysicalName();
 };
 
 
