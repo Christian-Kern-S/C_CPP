@@ -1,0 +1,5 @@
+# generated file by make
+*.o
+*.a
+*.d
+*.out
