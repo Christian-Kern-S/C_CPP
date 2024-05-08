@@ -15,6 +15,7 @@ enum class AccountType
 class IAccount
 {
 public:
+    virtual ~IAccount(){};
     virtual inline std::string getName() const = 0;
     virtual inline AccountType getType() const = 0;
     virtual inline double getBalance() const = 0;
