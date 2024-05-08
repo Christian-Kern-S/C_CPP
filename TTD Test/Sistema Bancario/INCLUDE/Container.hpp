@@ -9,17 +9,17 @@
 class Container
 {
 public:
-    bool addAccount(AccountType type);
     AccountType getTypeById(int id);
-    IAccount* getAccountByID(int id);
-    int setID(int id);
+    IAccount* getAccountById(int id);
     double getBalanceById(int id);
-    int getId() { return _id; }
+    
+    bool addAccount(AccountType type);
+    bool deleteAccount(int id);
+
     std::map<int,IAccount*> getAccount(){ return _accounts; }
 
 protected:
     std::map<int,IAccount*> _accounts;
-    int _id{0};
 
 private:
     Bank& bank = Bank::getInstance();

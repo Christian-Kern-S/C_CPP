@@ -32,7 +32,10 @@ TEST_F(test_Transfer, CanTransferMoney)
     Test_deposit(2,200);
 
     transfer(1,50,2);
-    
     EXPECT_EQ(Test_getBalanceById(1),50);
     EXPECT_EQ(Test_getBalanceById(2),250);
+
+    transfer(2,200,1);
+    EXPECT_EQ(Test_getBalanceById(1),250);
+    EXPECT_EQ(Test_getBalanceById(2),50);
 }

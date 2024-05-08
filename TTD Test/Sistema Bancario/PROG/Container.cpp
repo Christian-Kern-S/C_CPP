@@ -1,23 +1,17 @@
 #include "../INCLUDE/Container.hpp"
 
-IAccount* Container::getAccountByID(int id)
+IAccount* Container::getAccountById(int id)
 {
-    if (_accounts.find(setID(id)) != _accounts.end())
+    if (_accounts.find(id) != _accounts.end())
     {
         return _accounts[id];
     }
     return 0;
 }
 
-int Container::setID(int id)
-{
-    _id = id;
-    return _id;
-}
-
 AccountType Container::getTypeById(int id)
 {
-    if (_accounts.find(setID(id)) != _accounts.end())
+    if (_accounts.find(id) != _accounts.end())
     {
         return _accounts[id]->getType();
     }
@@ -37,9 +31,21 @@ bool Container::addAccount(AccountType type)
 
 double Container::getBalanceById(int id)
 {
-    if (_accounts.find(setID(id)) != _accounts.end())
+    if (_accounts.find(id) != _accounts.end())
     {
         return _accounts[id]->getBalance();
     }
-    return -1;
+    return 0;
+}
+
+bool Container::deleteAccount(int id)
+{
+    auto toDelete = _accounts.find(id);
+    if (toDelete != _accounts.end())
+    {
+        delete toDelete->second;
+        _accounts.erase(toDelete);
+        return 1;
+    }
+    return 0;
 }

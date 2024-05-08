@@ -13,8 +13,6 @@ public:
     inline std::string getName() const override { return _name; }
     inline AccountType getType() const override { return _type; }
     inline double getBalance() const override { return _balance; }
-
-protected:
     void setName(std::string name) override;
     void setBalance (int balance) override;
 

@@ -1,11 +1,20 @@
 #include "../INCLUDE/Container.hpp"
 #include <gtest/gtest.h>
 
-class test_Accountiner : public Container, public testing::Test
+class test_Container : public Container, public testing::Test
 {
+public:
+    int verifyAccount(int id)
+    {
+        if (_accounts.find(id) != _accounts.end())
+        {
+            return 1;
+        }
+        return 0;
+    }
 };
 
-TEST_F(test_Accountiner, canAddAccountInMap)
+TEST_F(test_Container, canAddAccountInMap)
 {
     Container::addAccount(AccountType::PHYSICAL);
     EXPECT_EQ(getTypeById(1),AccountType::PHYSICAL);
@@ -17,4 +26,15 @@ TEST_F(test_Accountiner, canAddAccountInMap)
     EXPECT_EQ(getTypeById(3),AccountType::PHYSICAL);
 
     EXPECT_EQ(getTypeById(4),AccountType::INVALID);
+}
+
+TEST_F(test_Container, canDeleteAccount)
+{
+    Container::addAccount(AccountType::PHYSICAL);
+    Container::addAccount(AccountType::LEGAL);
+    deleteAccount(1);
+    EXPECT_EQ(verifyAccount(1),0);
+    EXPECT_EQ(verifyAccount(2),1);
+    deleteAccount(2);
+    EXPECT_EQ(verifyAccount(2),0);
 }
