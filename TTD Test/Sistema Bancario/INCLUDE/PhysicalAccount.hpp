@@ -11,6 +11,4 @@ public:
         setName("Physical Account");
     }
 };
-
-
 #endif
