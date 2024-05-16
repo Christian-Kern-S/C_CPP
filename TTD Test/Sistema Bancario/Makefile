@@ -7,7 +7,7 @@ F_UNITTEST = $(UNITTEST)/*.cpp
 UNITTEST = ./UNITTEST
 F_INCLUDE = $(INCLUDE)/*.hpp
 INCLUDE = ./INCLUDE
-FILES_O = $(OBJ)/Bank.o $(OBJ)/Account.o $(OBJ)/Deposit.o $(OBJ)/Draft.o $(OBJ)/Transfer.o $(OBJ)/PhysicalAccount.o $(OBJ)/LegalAccount.o $(OBJ)/Container.o $(OBJ)/IAccount.o $(OBJ)/NullAccount.o
+FILES_O = $(OBJ)/Bank.o $(OBJ)/Account.o $(OBJ)/Deposit.o $(OBJ)/Draft.o $(OBJ)/Transfer.o $(OBJ)/PhysicalAccount.o $(OBJ)/LegalAccount.o $(OBJ)/Container.o $(OBJ)/IAccount.o $(OBJ)/NullAccount.o $(OBJ)/NullPhysicalAccount.o $(OBJ)/IPhysicalAccount.o
 OBJ = ./obj
 LIB = ./lib
 #----------- FLAGS -----------
