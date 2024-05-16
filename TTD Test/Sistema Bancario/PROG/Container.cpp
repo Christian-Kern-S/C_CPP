@@ -1,41 +1,14 @@
 #include "../INCLUDE/Container.hpp"
 
-IAccount* Container::getAccountById(int id)
-{
-    if (_accounts.find(id) != _accounts.end())
-    {
-        return _accounts[id];
-    }
-    return 0;
-}
-
-AccountType Container::getTypeById(int id)
-{
-    if (_accounts.find(id) != _accounts.end())
-    {
-        return _accounts[id]->getType();
-    }
-    return AccountType::INVALID;
-}
-
 bool Container::addAccount(AccountType type)
 {   
     if(type == AccountType::LEGAL || type == AccountType::PHYSICAL)
     {
         _accounts[i] = bank.create(type);
         i++;
-        return 1;
+        return true;
     }
-    return 0;
-}
-
-double Container::getBalanceById(int id)
-{
-    if (_accounts.find(id) != _accounts.end())
-    {
-        return _accounts[id]->getBalance();
-    }
-    return 0;
+    return false;
 }
 
 bool Container::deleteAccount(int id)
@@ -45,7 +18,89 @@ bool Container::deleteAccount(int id)
     {
         delete toDelete->second;
         _accounts.erase(toDelete);
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
+}
+
+bool Container::setAccountName(int id, std::string name)
+{
+    if (_accounts.find(id) != _accounts.end())
+    {
+        _accounts[id]->setName(name);
+        return true;
+    }
+    return false;
+}
+
+bool Container::setAccountCnpj(int id, std::string cnpj)
+{
+    if (_accounts.find(id) != _accounts.end())
+    {
+        if (LegalDynamicCast(id) == nullptr)
+        {
+            return false;
+        }
+        LegalDynamicCast(id)->setCnpj(cnpj);
+        return true;
+    }
+    return false;
+}
+
+bool Container::setAccountCpf(int id, std::string cpf)
+{
+    if (_accounts.find(id) != _accounts.end())
+    {
+        if (PhysicalDynamicCast(id)->getCpf() == "-1")
+        {
+            return false;
+        }
+        PhysicalDynamicCast(id)->setCpf(cpf);
+        std::cout<<PhysicalDynamicCast(id)->getCpf()<<std::endl;
+        return true;
+    }
+    return false;
+}
+
+bool Container::setAccountRegistrationStatus(int id, double status)
+{
+    if (_accounts.find(id) != _accounts.end())
+    {
+        LegalDynamicCast(id)->setRegistrationStatus(status);
+        return true;
+    }
+    return false;
+}
+bool Container::setAccountOpeningDate(int id, std::string day, std::string month, std::string year)
+{
+    if (_accounts.find(id) != _accounts.end())
+    {
+        LegalDynamicCast(id)->setOpeningDate(day, month, year);
+        return true;
+    }
+    return false;
+}
+
+LegalAccount* Container::LegalDynamicCast(int id)
+{
+    if (_accounts[id]->getType() == AccountType::LEGAL)
+    {
+        IAccount* account = _accounts[id];
+        LegalAccount* legalAccount = dynamic_cast<LegalAccount*>(account);
+        return legalAccount;
+    }
+    return nullptr;
+}
+
+IPhysicalAccount* Container::PhysicalDynamicCast(int id)
+{
+    
+    if (_accounts[id]->getType() == AccountType::PHYSICAL)
+    {
+        IAccount* account = _accounts[id];
+        PhysicalAccount* physicalAccount = dynamic_cast<PhysicalAccount*>(account);
+        return physicalAccount;    
+    }
+    NullPhysicalAccount* nullPhysicalAccount = new NullPhysicalAccount();
+    return nullPhysicalAccount;
 }

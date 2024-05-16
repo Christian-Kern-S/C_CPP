@@ -5,7 +5,7 @@ bool Draft::withdraw(int id, double value)
     if(_container.getAccountById(id)->getBalance() >= value)
     {
         _container.getAccountById(id)->setBalance(_container.getAccountById(id)->getBalance() - value);
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
