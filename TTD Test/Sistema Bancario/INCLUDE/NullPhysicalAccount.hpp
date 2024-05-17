@@ -6,7 +6,7 @@
 class NullPhysicalAccount : public IPhysicalAccount
 {
 public:
-    std::string getCpf() const override { return "-1"; };
+    std::string getCpf() const override { return ""; };
     void setCpf(std::string cpf) override {};
 };
 #endif
