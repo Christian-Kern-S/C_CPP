@@ -7,9 +7,9 @@ class test_LegalAccount : public LegalAccount, public ::testing::Test
 
 TEST_F(test_LegalAccount, canSetCnpj)
 {
-    EXPECT_EQ(getCnpj(),"0");
-    setCnpj("11111111111111");
-    EXPECT_EQ(getCnpj(),"11111111111111");
+    EXPECT_EQ(getDocument(),"");
+    setDocument("11111111111111");
+    EXPECT_EQ(getDocument(),"11111111111111");
 }
 
 TEST_F(test_LegalAccount, canSetRegistrationStatus)

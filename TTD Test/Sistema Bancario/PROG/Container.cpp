@@ -33,37 +33,37 @@ bool Container::setAccountName(int id, std::string name)
     return false;
 }
 
-bool Container::setAccountCnpj(int id, std::string cnpj)
+bool Container::setAccountDocument(int id, std::string document)
 {
-    if (_accounts.find(id) != _accounts.end())
+    if( _accounts.find(id) != _accounts.end() )
     {
-        if (LegalDynamicCast(id) == nullptr)
+        if(_accounts[id]->getType() == AccountType::LEGAL)
         {
+            if(_accounts[id]->verifyDocument(_accounts[id]->getType(),document) == true)
+            {
+                _accounts[id]->setDocument(document);
+                return true;
+            }
             return false;
         }
-        LegalDynamicCast(id)->setCnpj(cnpj);
-        return true;
+        else if(_accounts[id]->getType() == AccountType::PHYSICAL)
+        {
+            if(_accounts[id]->verifyDocument(_accounts[id]->getType(), document) == true)
+            {
+                _accounts[id]->setDocument(document);
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
     return false;
 }
 
-bool Container::setAccountCpf(int id, std::string cpf)
-{
-    if (_accounts.find(id) != _accounts.end())
-    {
-        if (PhysicalDynamicCast(id)->getCpf() == "")
-        {
-            return false;
-        }
-        PhysicalDynamicCast(id)->setCpf(cpf);
-        return true;
-    }
-    return false;
-}
 
 bool Container::setAccountRegistrationStatus(int id, double status)
 {
-    if (_accounts.find(id) != _accounts.end())
+    if (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL)
     {
         LegalDynamicCast(id)->setRegistrationStatus(status);
         return true;
@@ -72,7 +72,7 @@ bool Container::setAccountRegistrationStatus(int id, double status)
 }
 bool Container::setAccountOpeningDate(int id, std::string day, std::string month, std::string year)
 {
-    if (_accounts.find(id) != _accounts.end())
+    if (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL)
     {
         LegalDynamicCast(id)->setOpeningDate(day, month, year);
         return true;
@@ -82,24 +82,7 @@ bool Container::setAccountOpeningDate(int id, std::string day, std::string month
 
 LegalAccount* Container::LegalDynamicCast(int id)
 {
-    if (_accounts[id]->getType() == AccountType::LEGAL)
-    {
         IAccount* account = _accounts[id];
         LegalAccount* legalAccount = dynamic_cast<LegalAccount*>(account);
         return legalAccount;
-    }
-    return nullptr;
-}
-
-IPhysicalAccount* Container::PhysicalDynamicCast(int id)
-{
-    
-    if (_accounts[id]->getType() == AccountType::PHYSICAL)
-    {
-        IAccount* account = _accounts[id];
-        PhysicalAccount* physicalAccount = dynamic_cast<PhysicalAccount*>(account);
-        return physicalAccount;    
-    }
-    NullPhysicalAccount* nullPhysicalAccount = new NullPhysicalAccount();
-    return nullPhysicalAccount;
 }

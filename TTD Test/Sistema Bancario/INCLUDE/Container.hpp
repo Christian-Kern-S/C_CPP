@@ -7,38 +7,31 @@
 #include "Bank.hpp"
 #include "LegalAccount.hpp"
 #include "PhysicalAccount.hpp"
-#include "NullPhysicalAccount.hpp"
 
 class Container
 {
 public:
-    AccountType getTypeById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id]->getType() : AccountType::INVALID; }
-    IAccount* getAccountById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id] : 0; }
-
-    double getBalanceById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id]->getBalance() : false;}
-    std::string getCnpjById(int id) { return (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL) ? LegalDynamicCast(id)->getCnpj() : "false"; }
-    std::string getCpfById(int id) { return (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::PHYSICAL) ? PhysicalDynamicCast(id)->getCpf() : "false"; }
-
-    std::string getNameById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id]->getName() : "Invalid"; }
-    std::string getRegistrationStatusById(int id) { return (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL) ? LegalDynamicCast(id)->getRegistrationStatus() : "Invalid"; }
-    std::string getOpeningDateById(int id) { return (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL) ? LegalDynamicCast(id)->getOpeningDate() : "Invalid"; }
-
+    inline AccountType getTypeById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id]->getType() : AccountType::INVALID; }
+    inline IAccount* getAccountById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id] : 0; }
+    inline double getBalanceById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id]->getBalance() : false;}
+    inline std::string getDocumentById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id]->getDocument() : "Invalid"; }
+    inline std::string getNameById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id]->getName() : "Invalid"; }
+    inline std::string getRegistrationStatusById(int id) { return (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL) ? LegalDynamicCast(id)->getRegistrationStatus() : "Invalid"; }
+    inline std::string getOpeningDateById(int id) { return (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL) ? LegalDynamicCast(id)->getOpeningDate() : "Invalid"; }
+    inline std::map<int,IAccount*> getAccount(){ return _accounts; }
+    
     bool addAccount(AccountType type);
     bool deleteAccount(int id);
-
-    std::map<int,IAccount*> getAccount(){ return _accounts; }
 
 protected:
     std::map<int,IAccount*> _accounts;
 
     bool setAccountName(int id, std::string name);
-    bool setAccountCpf(int id, std::string);
-    bool setAccountCnpj(int id, std::string cnpj);
+    bool setAccountDocument(int id, std::string document);
     bool setAccountRegistrationStatus(int id, double status);
     bool setAccountOpeningDate(int id, std::string day, std::string month, std::string year);
 
     LegalAccount* LegalDynamicCast(int id);
-    IPhysicalAccount* PhysicalDynamicCast(int id);
 
 private:
     Bank& bank = Bank::getInstance();

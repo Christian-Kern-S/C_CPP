@@ -1,10 +1,5 @@
 #include "../INCLUDE/LegalAccount.hpp"
 
-void LegalAccount::setCnpj(std::string cnpj)
-{
-    _cnpj = cnpj;
-}
-
 void LegalAccount::setOpeningDate(std::string day, std::string month, std::string year)
 {
     std::string date = day + "/" + month + "/" + year;
