@@ -2,7 +2,9 @@
 
 bool Deposit::deposit(int id, double value)
 {
-    if (_container.getAccount().find(id) != _container.getAccount().end())
+    auto finder = _container.getAccount().find(id);
+    auto end = _container.getAccount().end();
+    if (finder != end)
     {
         _container.getAccountById(id)->setBalance(value);
         return true;

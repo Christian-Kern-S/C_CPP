@@ -11,9 +11,9 @@ public:
     {
         myContainer.addAccount(type);
     }
-    void Test_deposit(int id, double value)
+    bool Test_deposit(int id, double value)
     {
-        _deposit.deposit(id,value);
+       return _deposit.deposit(id,value);
     }
     double Test_getBalanceById(int id)
     {
@@ -36,4 +36,6 @@ TEST_F(test_Draft, CanWithdrawMoney)
 
     EXPECT_EQ(withdraw(2,100),1);
     EXPECT_EQ(withdraw(1,100),0);
+    EXPECT_FALSE(Test_deposit(3,10000));
+    EXPECT_FALSE(withdraw(3,1000));
 }

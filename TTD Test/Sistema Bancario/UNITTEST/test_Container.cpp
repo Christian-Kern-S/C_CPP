@@ -47,6 +47,7 @@ TEST_F(test_Container, canSetAccountName)
     EXPECT_TRUE(Container::setAccountName(2,"Kern's Corporation"));
     EXPECT_EQ(Container::getNameById(1),"Christian");
     EXPECT_EQ(Container::getNameById(2),"Kern's Corporation");
+    EXPECT_FALSE(Container::setAccountName(3,"Kern's Corporation"));
 }
 
 TEST_F(test_Container, canSetAccountCnpj)

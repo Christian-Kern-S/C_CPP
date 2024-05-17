@@ -2,10 +2,16 @@
 
 bool Draft::withdraw(int id, double value)
 {
-    if(_container.getAccountById(id)->getBalance() >= value)
+    auto finder = _container.getAccount().find(id);
+    auto end = _container.getAccount().end();
+    if (finder != end)
     {
-        _container.getAccountById(id)->setBalance(_container.getAccountById(id)->getBalance() - value);
-        return true;
+        if(_container.getBalanceById(id) >= value)
+        {
+            _container.getAccountById(id)->setBalance(_container.getAccountById(id)->getBalance() - value);
+            return true;
+        }
+        return false;
     }
     return false;
 }

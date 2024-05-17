@@ -51,12 +51,11 @@ bool Container::setAccountCpf(int id, std::string cpf)
 {
     if (_accounts.find(id) != _accounts.end())
     {
-        if (PhysicalDynamicCast(id)->getCpf() == "-1")
+        if (PhysicalDynamicCast(id)->getCpf() == "")
         {
             return false;
         }
         PhysicalDynamicCast(id)->setCpf(cpf);
-        std::cout<<PhysicalDynamicCast(id)->getCpf()<<std::endl;
         return true;
     }
     return false;

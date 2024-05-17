@@ -32,4 +32,5 @@ TEST_F(test_Deposit, canAddMoney)
     EXPECT_EQ(Test_getBalanceById(1),1000);
     EXPECT_EQ(Test_getBalanceById(2),900);
     EXPECT_EQ(Test_getBalanceById(3),800);
+    EXPECT_FALSE(deposit(4,100));
 }
