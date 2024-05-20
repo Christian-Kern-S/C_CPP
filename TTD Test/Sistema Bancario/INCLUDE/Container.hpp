@@ -3,7 +3,6 @@
 
 #include <map>
 #include <iostream>
-//#include "IAccount.hpp"
 #include "Bank.hpp"
 #include "LegalAccount.hpp"
 #include "PhysicalAccount.hpp"

@@ -39,7 +39,7 @@ bool Container::setAccountDocument(int id, std::string document)
     {
         if(_accounts[id]->getType() == AccountType::LEGAL)
         {
-            if(_accounts[id]->verifyDocument(_accounts[id]->getType(),document) == true)
+            if(_accounts[id]->verifyDocument(document) == true)
             {
                 _accounts[id]->setDocument(document);
                 return true;
@@ -48,7 +48,7 @@ bool Container::setAccountDocument(int id, std::string document)
         }
         else if(_accounts[id]->getType() == AccountType::PHYSICAL)
         {
-            if(_accounts[id]->verifyDocument(_accounts[id]->getType(), document) == true)
+            if(_accounts[id]->verifyDocument(document) == true)
             {
                 _accounts[id]->setDocument(document);
                 return true;

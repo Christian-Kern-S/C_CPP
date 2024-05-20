@@ -17,8 +17,8 @@ public:
     void setName(std::string name) override;
     void setBalance (int balance) override;
     void setDocument(std::string document) override;
-    bool verifyDocument(AccountType type, std::string document){
-        switch (type)
+    bool verifyDocument(std::string document){
+        switch (getType())
         {
         case AccountType::LEGAL:
             return verifyCnpj(document);

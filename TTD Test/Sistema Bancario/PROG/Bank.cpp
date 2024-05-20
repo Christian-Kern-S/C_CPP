@@ -1,8 +1,8 @@
 #include "../INCLUDE/Bank.hpp"
 
-IAccount* Bank::create(AccountType t)
+IAccount* Bank::create(AccountType type)
 {
-    switch (t)
+    switch (type)
     {
     case AccountType::PHYSICAL:
         return new PhysicalAccount();

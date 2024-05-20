@@ -23,6 +23,6 @@ public:
     virtual void setName(std::string name) = 0;
     virtual void setBalance(int balance) = 0;
     virtual void setDocument(std::string document) = 0;
-    virtual bool verifyDocument(AccountType type, std::string document) = 0;
+    virtual bool verifyDocument(std::string document) = 0;
 };
 #endif
