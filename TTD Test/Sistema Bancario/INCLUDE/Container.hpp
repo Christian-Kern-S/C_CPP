@@ -1,11 +1,14 @@
 #ifndef CONTAINER_HPP
 #define CONTAINER_HPP
 
+#include <vector>
 #include <map>
 #include <iostream>
 #include "Bank.hpp"
 #include "LegalAccount.hpp"
 #include "PhysicalAccount.hpp"
+#include "Observer.hpp"
+
 
 class Container
 {
@@ -19,8 +22,10 @@ public:
     inline std::string getOpeningDateById(int id) { return (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL) ? LegalDynamicCast(id)->getOpeningDate() : "Invalid"; }
     inline std::map<int,IAccount*> getAccount(){ return _accounts; }
     
+    void addObserver(Observer& observer);
     bool addAccount(AccountType type);
     bool deleteAccount(int id);
+    void notify();
 
 protected:
     std::map<int,IAccount*> _accounts;
@@ -33,6 +38,7 @@ protected:
     LegalAccount* LegalDynamicCast(int id);
 
 private:
+    std::vector<Observer *> _observers;
     Bank& bank = Bank::getInstance();
     int i{1};
 };

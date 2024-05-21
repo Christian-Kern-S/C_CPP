@@ -1,10 +1,16 @@
 #include "../INCLUDE/Container.hpp"
 
+void Container::addObserver(Observer& observer)
+{
+    _observers.push_back(&observer);
+}
+
 bool Container::addAccount(AccountType type)
 {   
     if(type == AccountType::LEGAL || type == AccountType::PHYSICAL)
     {
         _accounts[i] = bank.create(type);
+        notify();
         i++;
         return true;
     }
@@ -21,6 +27,14 @@ bool Container::deleteAccount(int id)
         return true;
     }
     return false;
+}
+
+void Container::notify()
+{
+    for(Observer* observer : _observers)
+    {
+        observer->update(_accounts);
+    }
 }
 
 bool Container::setAccountName(int id, std::string name)
