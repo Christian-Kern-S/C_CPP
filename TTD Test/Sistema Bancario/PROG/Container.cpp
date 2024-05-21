@@ -2,16 +2,16 @@
 
 void Container::addObserver(Observer& observer)
 {
-    _observers.push_back(&observer);
+    observers_.push_back(&observer);
 }
 
 bool Container::addAccount(AccountType type)
 {   
     if(type == AccountType::LEGAL || type == AccountType::PHYSICAL)
     {
-        _accounts[i] = bank.create(type);
+        _accounts[i_] = bank.create(type);
         notify();
-        i++;
+        i_++;
         return true;
     }
     return false;
@@ -31,7 +31,7 @@ bool Container::deleteAccount(int id)
 
 void Container::notify()
 {
-    for(Observer* observer : _observers)
+    for(Observer* observer : observers_)
     {
         observer->update(_accounts);
     }
@@ -51,25 +51,8 @@ bool Container::setAccountDocument(int id, std::string document)
 {
     if( _accounts.find(id) != _accounts.end() )
     {
-        if(_accounts[id]->getType() == AccountType::LEGAL)
-        {
-            if(_accounts[id]->verifyDocument(document) == true)
-            {
-                _accounts[id]->setDocument(document);
-                return true;
-            }
-            return false;
-        }
-        else if(_accounts[id]->getType() == AccountType::PHYSICAL)
-        {
-            if(_accounts[id]->verifyDocument(document) == true)
-            {
-                _accounts[id]->setDocument(document);
-                return true;
-            }
-            return false;
-        }
-        return false;
+         _accounts[id]->setDocument(document);
+        return true;
     }
     return false;
 }

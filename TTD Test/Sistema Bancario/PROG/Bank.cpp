@@ -5,11 +5,11 @@ IAccount* Bank::create(AccountType type)
     switch (type)
     {
     case AccountType::PHYSICAL:
-        return new PhysicalAccount();
+        return new PhysicalAccount(AccountType::PHYSICAL);
         break;
 
     case AccountType::LEGAL:
-        return new LegalAccount();
+        return new LegalAccount(AccountType::LEGAL);
         break;
 
     default:

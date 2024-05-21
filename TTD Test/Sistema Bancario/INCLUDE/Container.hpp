@@ -38,8 +38,8 @@ protected:
     LegalAccount* LegalDynamicCast(int id);
 
 private:
-    std::vector<Observer *> _observers;
+    std::vector<Observer *> observers_;
     Bank& bank = Bank::getInstance();
-    int i{1};
+    int i_{1};
 };
 #endif

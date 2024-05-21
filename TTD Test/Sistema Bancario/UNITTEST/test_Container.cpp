@@ -1,5 +1,8 @@
+#include "../MOCKS/MockObserver.hpp"
 #include "../INCLUDE/Container.hpp"
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
+
 
 class test_Container : public Container, public testing::Test
 {
@@ -65,6 +68,7 @@ TEST_F(test_Container, canSetAccountCnpj)
 
 TEST_F(test_Container, canSetAccountCpf)
 {
+    
     Container::addAccount(AccountType::PHYSICAL);
     Container::addAccount(AccountType::LEGAL);
     EXPECT_FALSE(Container::setAccountDocument(2,"11111111111"));
@@ -95,4 +99,13 @@ TEST_F(test_Container, canSetAccountOpeningDate)
     EXPECT_TRUE(Container::setAccountOpeningDate(2,"11","11","2001"));
     EXPECT_EQ(Container::getOpeningDateById(1),"Invalid");
     EXPECT_EQ(Container::getOpeningDateById(2),"11/11/2001");
+}
+
+TEST_F(test_Container, canGetNotification)
+{
+    MockObserver mockObserver;
+    EXPECT_CALL(mockObserver, update(_accounts)).Times(1);
+    addObserver(mockObserver);
+    addAccount(AccountType::LEGAL);
+    notify();
 }

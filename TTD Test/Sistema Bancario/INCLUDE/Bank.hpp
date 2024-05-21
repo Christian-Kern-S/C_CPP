@@ -1,7 +1,6 @@
 #ifndef BANK_HPP
 #define BANK_HPP
 
-#include "Account.hpp"
 #include "NullAccount.hpp"
 #include "PhysicalAccount.hpp"
 #include "LegalAccount.hpp"
