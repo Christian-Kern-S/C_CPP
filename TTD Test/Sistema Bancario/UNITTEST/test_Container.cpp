@@ -104,8 +104,8 @@ TEST_F(test_Container, canSetAccountOpeningDate)
 TEST_F(test_Container, canGetNotification)
 {
     MockObserver mockObserver;
-    EXPECT_CALL(mockObserver, update(_accounts)).Times(1);
+    int expectedValue = 2;
+    EXPECT_CALL(mockObserver, update(expectedValue));
     addObserver(mockObserver);
     addAccount(AccountType::LEGAL);
-    notify();
 }

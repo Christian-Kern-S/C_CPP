@@ -36,10 +36,10 @@ protected:
     bool setAccountOpeningDate(int id, std::string day, std::string month, std::string year);
 
     LegalAccount* LegalDynamicCast(int id);
+    int i_{1};
 
 private:
     std::vector<Observer *> observers_;
     Bank& bank = Bank::getInstance();
-    int i_{1};
 };
 #endif
