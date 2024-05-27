@@ -18,7 +18,7 @@ public:
 
     void setName(std::string name) override;
     void setBalance (int balance) override;
-    void setDocument(std::string document) override;
+    bool setDocument(std::string document) override;
     bool verifyDocument(const std::string& document) override;
 };
 #endif

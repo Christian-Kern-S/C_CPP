@@ -10,8 +10,8 @@ bool Container::addAccount(AccountType type)
     if(type == AccountType::LEGAL || type == AccountType::PHYSICAL)
     {
         _accounts[i_] = bank.create(type);
-        notify();
         i_++;
+        notify();
         return true;
     }
     return false;
@@ -33,7 +33,7 @@ void Container::notify()
 {
     for(Observer* observer : observers_)
     {
-        observer->update(_accounts);
+        observer->update(i_);
     }
 }
 
@@ -51,8 +51,7 @@ bool Container::setAccountDocument(int id, std::string document)
 {
     if( _accounts.find(id) != _accounts.end() )
     {
-         _accounts[id]->setDocument(document);
-        return true;
+       return _accounts[id]->setDocument(document);
     }
     return false;
 }

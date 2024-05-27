@@ -7,6 +7,6 @@
 class Observer
 {
 public:
-    virtual void update(std::map<int,IAccount*> _accounts) = 0;
+    virtual void update(int _accounts) = 0;
 };
 #endif

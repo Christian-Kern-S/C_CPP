@@ -22,7 +22,7 @@ public:
     virtual inline std::string getDocument() const = 0;
     virtual void setName(std::string name) = 0;
     virtual void setBalance(int balance) = 0;
-    virtual void setDocument(std::string document) = 0;
+    virtual bool setDocument(std::string document) = 0;
     virtual bool verifyDocument(const std::string& document) = 0;
     
 protected:

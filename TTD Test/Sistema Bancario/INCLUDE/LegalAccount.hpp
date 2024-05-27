@@ -20,7 +20,7 @@ public:
 
     void setName(std::string name) override;
     void setBalance (int balance) override;
-    void setDocument(std::string document) override;
+    bool setDocument(std::string document) override;
     void setRegistrationStatus(bool status);
     void setOpeningDate(std::string day, std::string month, std::string year);
     bool verifyDocument(const std::string& document) override;

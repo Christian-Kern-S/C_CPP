@@ -11,20 +11,22 @@ void PhysicalAccount::setBalance(int balance)
     balance_ = balance;
 }
 
-void PhysicalAccount::setDocument(std::string document)
+bool PhysicalAccount::setDocument(std::string document)
 {
     if(verifyDocument(document) == true)
     {
         document_ = document;
+        return true;
     }
+    return false;
 }
 
 bool PhysicalAccount::verifyDocument(const std::string& document)
 {
-    if(document.size() != 11 || static_cast<std::string::size_type>(std::count(document.begin(), document.end(), document[0])) == document.size())
-    {
-        return false;
-    }
+    if(document.size() != 11 || (document[0] != '0' && static_cast<std::string::size_type>(std::count(document.begin(), document.end(), document[0])) == document.size()))
+        {
+            return false;
+        }
 
     int total = 0;
     int remainder = 0;
