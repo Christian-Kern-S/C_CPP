@@ -2,15 +2,15 @@
 
 bool Transfer::transfer(int id1, double value, int id2)
 {
-    auto finder1 = _container.getAccount().find(id1);
-    auto finder2 = _container.getAccount().find(id2);
-    auto end = _container.getAccount().end();
+    auto finder1 = container_.getAccount().find(id1);
+    auto finder2 = container_.getAccount().find(id2);
+    auto end = container_.getAccount().end();
     if (finder1 != end && finder2 != end)
     {
-        if(_container.getBalanceById(id1) >= value)
+        if(container_.getBalanceById(id1) >= value)
         {
-            _container.getAccountById(id1)->setBalance(_container.getAccountById(id1)->getBalance() - value);
-            _container.getAccountById(id2)->setBalance(_container.getAccountById(id2)->getBalance() + value);
+            container_.getAccountById(id1)->setBalance(container_.getAccountById(id1)->getBalance() - value);
+            container_.getAccountById(id2)->setBalance(container_.getAccountById(id2)->getBalance() + value);
             return true;
         }
         return false;

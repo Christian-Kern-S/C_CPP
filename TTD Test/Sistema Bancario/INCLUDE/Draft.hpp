@@ -6,12 +6,12 @@
 class Draft
 {
 public:
-    Draft(Container& container) : _container(container)
+    Draft(Container& container) : container_(container)
     {
     }
     bool withdraw(int id, double value);
 
 private:
-    Container& _container;
+    Container& container_;
 };
 #endif

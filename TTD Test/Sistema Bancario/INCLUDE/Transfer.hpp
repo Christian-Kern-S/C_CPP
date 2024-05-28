@@ -6,12 +6,12 @@
 class Transfer
 {
 public:
-    Transfer(Container& container) : _container(container)
+    Transfer(Container& container) : container_(container)
     {
     }
     bool transfer(int id1, double value, int id2);
 
 private:
-    Container& _container;
+    Container& container_;
 };
 #endif

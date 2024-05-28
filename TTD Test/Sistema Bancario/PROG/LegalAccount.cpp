@@ -23,18 +23,18 @@ bool LegalAccount::setDocument(std::string document)
 void LegalAccount::setOpeningDate(std::string day, std::string month, std::string year)
 {
     std::string date = day + "/" + month + "/" + year;
-    _openingDate = date;
+    openingDate_ = date;
 }
 
 void LegalAccount::setRegistrationStatus(bool status)
 {   
     if (status == 1)
     {
-        _registrationStatus = "Active";
+        registrationStatus_ = "Active";
     }
     else if (status == 0)
     {
-        _registrationStatus = "Inactive";
+        registrationStatus_ = "Inactive";
     }
 }
 

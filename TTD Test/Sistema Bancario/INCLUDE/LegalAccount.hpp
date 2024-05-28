@@ -8,11 +8,11 @@ public:
     LegalAccount(AccountType type)
     {
         setName("Legal Account");
-        _registrationStatus = "Active";
+        registrationStatus_ = "Active";
         type_ = type;
     }
-    std::string getRegistrationStatus() { return _registrationStatus; }
-    std::string getOpeningDate() { return _openingDate; }
+    std::string getRegistrationStatus() { return registrationStatus_; }
+    std::string getOpeningDate() { return openingDate_; }
     inline std::string getName() const override { return name_; }
     inline std::string getDocument() const override { return document_; }
     inline AccountType getType() const override { return type_; }
@@ -26,7 +26,7 @@ public:
     bool verifyDocument(const std::string& document) override;
 
 private:
-    std::string _registrationStatus{"Inactive"};
-    std::string _openingDate{"00/00/0000"};
+    std::string registrationStatus_{"Inactive"};
+    std::string openingDate_{"00/00/0000"};
 };
 #endif

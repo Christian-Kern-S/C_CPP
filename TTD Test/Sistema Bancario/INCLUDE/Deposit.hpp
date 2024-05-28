@@ -7,12 +7,12 @@
 class Deposit
 {
 public:
-    Deposit(Container& container) : _container(container)
+    Deposit(Container& container) : container_(container)
     {
     }
     bool deposit(int id,double value);
 
 private:
-    Container& _container;
+    Container& container_;
 };
 #endif
