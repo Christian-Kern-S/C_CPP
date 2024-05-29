@@ -9,8 +9,8 @@ bool Container::addAccount(AccountType type)
 {   
     if(type == AccountType::LEGAL || type == AccountType::PHYSICAL)
     {
-        _accounts[i_] = bank.create(type);
-        i_++;
+        _accounts[number_] = bank.create(type);
+        number_++;
         notify();
         return true;
     }
@@ -33,7 +33,7 @@ void Container::notify()
 {
     for(Observer* observer : observers_)
     {
-        observer->update(i_);
+        observer->update(number_);
     }
 }
 

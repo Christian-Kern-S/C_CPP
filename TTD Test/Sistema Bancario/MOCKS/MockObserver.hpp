@@ -7,6 +7,6 @@
 class MockObserver : public Observer
 {
 public:
-    MOCK_METHOD(void, update, (int i_), (override));
+    MOCK_METHOD(void, update, (int number_), (override));
 };
 #endif

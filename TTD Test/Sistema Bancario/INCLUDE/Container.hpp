@@ -36,7 +36,7 @@ protected:
     bool setAccountOpeningDate(int id, std::string day, std::string month, std::string year);
 
     LegalAccount* LegalDynamicCast(int id);
-    int i_{1};
+    int number_{1};
 
 private:
     std::vector<Observer *> observers_;

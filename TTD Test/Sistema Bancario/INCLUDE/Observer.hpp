@@ -4,6 +4,6 @@
 class Observer
 {
 public:
-    virtual void update(int i_) = 0;
+    virtual void update(int number_) = 0;
 };
 #endif
