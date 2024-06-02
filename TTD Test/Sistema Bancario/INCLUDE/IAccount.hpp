@@ -9,7 +9,9 @@ enum class AccountType
 {
     INVALID = -1,
     PHYSICAL,
-    LEGAL
+    PREMIUM_PHYSICAL,
+    LEGAL,
+    PREMIUM_LEGAL
 };
 
 class IAccount
@@ -20,12 +22,14 @@ public:
     virtual inline AccountType getType() const = 0;
     virtual inline double getBalance() const = 0;
     virtual inline std::string getDocument() const = 0;
+    virtual inline bool isPremium() const = 0;
     virtual void setName(std::string name) = 0;
     virtual void setBalance(int balance) = 0;
     virtual bool setDocument(std::string document) = 0;
     virtual bool verifyDocument(const std::string& document) = 0;
     
 protected:
+    bool premium_{false};
     std::string document_{""};
     double balance_{0};
     std::string name_{""};

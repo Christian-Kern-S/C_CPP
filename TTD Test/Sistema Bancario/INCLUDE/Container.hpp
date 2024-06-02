@@ -20,7 +20,8 @@ public:
     inline std::string getNameById(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id]->getName() : "Invalid"; }
     inline std::string getRegistrationStatusById(int id) { return (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL) ? LegalDynamicCast(id)->getRegistrationStatus() : "Invalid"; }
     inline std::string getOpeningDateById(int id) { return (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL) ? LegalDynamicCast(id)->getOpeningDate() : "Invalid"; }
-    inline std::map<int,IAccount*> getAccount(){ return _accounts; }
+    inline std::map<int,IAccount*> getAccount() { return _accounts; }
+    inline bool isAccountValid(int id) { return (_accounts.find(id) != _accounts.end()) ? _accounts[id]->isPremium() : false; }
     
     void addObserver(Observer& observer);
     bool addAccount(AccountType type);

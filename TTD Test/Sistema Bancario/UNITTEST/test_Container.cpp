@@ -109,3 +109,16 @@ TEST_F(test_Container, canGetNotification)
     addObserver(mockObserver);
     addAccount(AccountType::LEGAL);
 }
+
+TEST_F(test_Container, canGetIsPremium)
+{
+    Container::addAccount(AccountType::PREMIUM_PHYSICAL);
+    Container::addAccount(AccountType::LEGAL);
+    Container::addAccount(AccountType::PHYSICAL);
+    Container::addAccount(AccountType::PREMIUM_LEGAL);
+
+    EXPECT_TRUE(Container::isAccountValid(1));
+    EXPECT_FALSE(Container::isAccountValid(2));
+    EXPECT_FALSE(Container::isAccountValid(3));
+    EXPECT_TRUE(Container::isAccountValid(4));
+}

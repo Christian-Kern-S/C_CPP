@@ -4,6 +4,7 @@
 #include "NullAccount.hpp"
 #include "PhysicalAccount.hpp"
 #include "LegalAccount.hpp"
+#include "PremiumPhysicalAccount.hpp"
 
 class Bank 
 {

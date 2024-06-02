@@ -7,7 +7,7 @@ void Container::addObserver(Observer& observer)
 
 bool Container::addAccount(AccountType type)
 {   
-    if(type == AccountType::LEGAL || type == AccountType::PHYSICAL)
+    if(type == AccountType::LEGAL || type == AccountType::PHYSICAL || type == AccountType::PREMIUM_LEGAL || type == AccountType::PREMIUM_PHYSICAL)
     {
         _accounts[number_] = bank.create(type);
         number_++;

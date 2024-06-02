@@ -1,0 +1,58 @@
+#include "../INCLUDE/PremiumPhysicalAccount.hpp"
+
+
+void PremiumPhysicalAccount::setName(std::string name)
+{
+    name_ = name;
+}
+
+void PremiumPhysicalAccount::setBalance(int balance)
+{
+    balance_ = balance;
+}
+
+bool PremiumPhysicalAccount::setDocument(std::string document)
+{
+    if(verifyDocument(document) == true)
+    {
+        document_ = document;
+        return true;
+    }
+    return false;
+}
+
+bool PremiumPhysicalAccount::verifyDocument(const std::string& document)
+{
+    if(document.size() != 11 || (document[0] != '0' && static_cast<std::string::size_type>(std::count(document.begin(), document.end(), document[0])) == document.size()))
+        {
+            return false;
+        }
+
+    int total = 0;
+    int remainder = 0;
+
+    for(int i = 0; i < 9; ++i)
+    {
+        total += (document[i] - '0') * (10 - i);
+    }
+    remainder = total % 11;
+    if(remainder < 2) remainder = 0;
+    else remainder = 11 - remainder;
+
+    if(remainder != (document[9] - '0'))
+    {
+        return false;
+    }
+    total = 0;
+    remainder = 0;
+
+    for(int i = 0; i < 10; ++i)
+    {
+        total += (document[i] - '0') * (11 - i);
+    }
+    remainder = total % 11;
+    if(remainder < 2) remainder = 0;
+    else remainder = 11 - remainder;
+
+    return remainder == (document[10] - '0');
+}

@@ -1,15 +1,15 @@
-#ifndef LEGAL_ACCOUNT_HPP
-#define LEGAL_ACCOUNT_HPP
+#ifndef PREMIUM_LEGAL_ACCOUNT_HPP
+#define PREMIUM_LEGAL_ACCOUNT_HPP
+
 #include "IAccount.hpp"
 
-class LegalAccount : public IAccount 
+class PremiumLegalAccount : public IAccount
 {
 public:
-    LegalAccount(AccountType type)
+    PremiumLegalAccount(IAccount* account) : premiumLegalAccount_(account)
     {
-        setName("Legal Account");
+        setName("Premium Account");
         registrationStatus_ = "Active";
-        type_ = type;
     }
     std::string getRegistrationStatus() { return registrationStatus_; }
     std::string getOpeningDate() { return openingDate_; }
@@ -17,7 +17,7 @@ public:
     inline std::string getDocument() const override { return document_; }
     inline AccountType getType() const override { return type_; }
     inline double getBalance() const override { return balance_; }
-    inline bool isPremium() const override { return false; }
+    inline bool isPremium() const override { return true; }
 
     void setName(std::string name) override;
     void setBalance (int balance) override;
@@ -27,7 +27,9 @@ public:
     bool verifyDocument(const std::string& document) override;
 
 private:
+    IAccount* premiumLegalAccount_;
     std::string registrationStatus_{"Inactive"};
     std::string openingDate_{"00/00/0000"};
 };
+
 #endif
