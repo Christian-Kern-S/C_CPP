@@ -20,21 +20,16 @@ bool LegalAccount::setDocument(std::string document)
     return false;
 }
 
-void LegalAccount::setOpeningDate(std::string day, std::string month, std::string year)
+void LegalAccount::setOpeningDate(std::string date)
 {
-    std::string date = day + "/" + month + "/" + year;
     openingDate_ = date;
 }
 
-void LegalAccount::setRegistrationStatus(bool status)
+void LegalAccount::setRegistrationStatus(std::string status)
 {   
-    if (status == 1)
+    if (status == "Active" ||  status == "Inactive")
     {
-        registrationStatus_ = "Active";
-    }
-    else if (status == 0)
-    {
-        registrationStatus_ = "Inactive";
+        registrationStatus_ = status;
     }
 }
 

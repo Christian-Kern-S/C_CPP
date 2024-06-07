@@ -1,5 +1,6 @@
 #include "../MOCKS/MockObserver.hpp"
 #include "../INCLUDE/Container.hpp"
+#include "../INCLUDE/Deposit.hpp"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
@@ -83,11 +84,11 @@ TEST_F(test_Container, canSetAccountRegistrationStatus)
 {
     Container::addAccount(AccountType::PHYSICAL);
     Container::addAccount(AccountType::LEGAL);
-    EXPECT_FALSE(Container::setAccountRegistrationStatus(1,1));
-    EXPECT_TRUE(Container::setAccountRegistrationStatus(2,0));
+    EXPECT_FALSE(Container::setAccountRegistrationStatus(1,"Active"));
+    EXPECT_TRUE(Container::setAccountRegistrationStatus(2,"Inactive"));
     EXPECT_EQ(Container::getRegistrationStatusById(1),"Invalid");
     EXPECT_EQ(Container::getRegistrationStatusById(2),"Inactive");
-    EXPECT_TRUE(Container::setAccountRegistrationStatus(2,1));
+    EXPECT_TRUE(Container::setAccountRegistrationStatus(2,"Active"));
     EXPECT_EQ(Container::getRegistrationStatusById(2),"Active");
 }
 
@@ -95,8 +96,8 @@ TEST_F(test_Container, canSetAccountOpeningDate)
 {
     Container::addAccount(AccountType::PHYSICAL);
     Container::addAccount(AccountType::LEGAL);
-    EXPECT_FALSE(Container::setAccountOpeningDate(1,"11","11","2001"));
-    EXPECT_TRUE(Container::setAccountOpeningDate(2,"11","11","2001"));
+    EXPECT_FALSE(Container::setAccountOpeningDate(1,"11/11/2001"));
+    EXPECT_TRUE(Container::setAccountOpeningDate(2,"11/11/2001"));
     EXPECT_EQ(Container::getOpeningDateById(1),"Invalid");
     EXPECT_EQ(Container::getOpeningDateById(2),"11/11/2001");
 }
@@ -117,8 +118,31 @@ TEST_F(test_Container, canGetIsPremium)
     Container::addAccount(AccountType::PHYSICAL);
     Container::addAccount(AccountType::PREMIUM_LEGAL);
 
-    EXPECT_TRUE(Container::isAccountValid(1));
-    EXPECT_FALSE(Container::isAccountValid(2));
-    EXPECT_FALSE(Container::isAccountValid(3));
-    EXPECT_TRUE(Container::isAccountValid(4));
+    EXPECT_TRUE(Container::isAccountPremium(1));
+    EXPECT_FALSE(Container::isAccountPremium(2));
+    EXPECT_FALSE(Container::isAccountPremium(3));
+    EXPECT_TRUE(Container::isAccountPremium(4));
+}
+
+TEST_F(test_Container, canUpgradeAccount)
+{
+    Container::addAccount(AccountType::PHYSICAL);
+    Container::addAccount(AccountType::LEGAL);
+
+    Container::setAccountName(1,"Christian");
+    Container::setAccountName(2,"Kern Corp");
+    Container::setAccountDocument(1,"93712749058");
+    Container::setAccountDocument(2,"38338963000172");
+    Container::setAccountOpeningDate(2,"11/10/2020");
+
+    EXPECT_EQ(getNameById(1),"Christian");
+    EXPECT_EQ(getNameById(2),"Kern Corp");
+    EXPECT_EQ(getDocumentById(1),"93712749058");
+    EXPECT_EQ(getDocumentById(2),"38338963000172");
+    EXPECT_EQ(getOpeningDateById(2),"11/10/2020");
+
+    Container::upgradeAccount(1);
+    EXPECT_EQ(getNameById(1),"Christian");
+    EXPECT_EQ(getDocumentById(1),"93712749058");
+    EXPECT_TRUE(isAccountPremium(1));
 }

@@ -15,6 +15,10 @@ public:
     {
        return myContainer.getBalanceById(id);
     }
+    bool Test_upgradeAccount(int id)
+    {
+        return myContainer.upgradeAccount(id);
+    }
 private:
     Container myContainer;
 };
@@ -33,4 +37,6 @@ TEST_F(test_Deposit, canAddMoney)
     EXPECT_EQ(Test_getBalanceById(2),900);
     EXPECT_EQ(Test_getBalanceById(3),800);
     EXPECT_FALSE(deposit(4,100));
+    Test_upgradeAccount(1);
+    EXPECT_EQ(Test_getBalanceById(1),1000);
 }

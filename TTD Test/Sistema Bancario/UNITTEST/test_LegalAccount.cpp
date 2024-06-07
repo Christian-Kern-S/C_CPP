@@ -32,15 +32,15 @@ TEST_F(test_LegalAccount, canSetCnpj)
 TEST_F(test_LegalAccount, canSetRegistrationStatus)
 {
     EXPECT_EQ(getRegistrationStatus(),"Active");
-    setRegistrationStatus(0);
+    setRegistrationStatus("Inactive");
     EXPECT_EQ(getRegistrationStatus(),"Inactive");
-    setRegistrationStatus(1);
+    setRegistrationStatus("Active");
     EXPECT_EQ(getRegistrationStatus(),"Active");
 }
 
 TEST_F(test_LegalAccount, canSetOpeningDate)
 {
     EXPECT_EQ(getOpeningDate(),"00/00/0000");
-    setOpeningDate("10","12","2001");
+    setOpeningDate("10/12/2001");
     EXPECT_EQ(getOpeningDate(),"10/12/2001");
 }

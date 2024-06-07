@@ -57,7 +57,7 @@ bool Container::setAccountDocument(int id, std::string document)
 }
 
 
-bool Container::setAccountRegistrationStatus(int id, double status)
+bool Container::setAccountRegistrationStatus(int id, std::string status)
 {
     if (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL)
     {
@@ -66,11 +66,11 @@ bool Container::setAccountRegistrationStatus(int id, double status)
     }
     return false;
 }
-bool Container::setAccountOpeningDate(int id, std::string day, std::string month, std::string year)
+bool Container::setAccountOpeningDate(int id, std::string date)
 {
     if (_accounts.find(id) != _accounts.end() && _accounts[id]->getType() == AccountType::LEGAL)
     {
-        LegalDynamicCast(id)->setOpeningDate(day, month, year);
+        LegalDynamicCast(id)->setOpeningDate(date);
         return true;
     }
     return false;
@@ -81,4 +81,63 @@ LegalAccount* Container::LegalDynamicCast(int id)
         IAccount* account = _accounts[id];
         LegalAccount* legalAccount = dynamic_cast<LegalAccount*>(account);
         return legalAccount;
+}
+
+bool Container::upgradeAccount(int id)
+{
+    if (_accounts[id]->isPremium() == false)
+    {
+        auto toDelete = _accounts.find(id);
+        if (toDelete != _accounts.end())
+        {
+            AccountType type = _accounts[id]->getType();
+            switch (type)
+            {
+            case AccountType::PHYSICAL:{
+                TempDocument_ = _accounts[id]->getDocument();
+                TempBalance_ = _accounts[id]->getBalance();
+                TempName_ = _accounts[id]->getName();
+
+                delete toDelete->second;
+                _accounts.erase(toDelete);
+                _accounts[id] = bank.create(AccountType::PREMIUM_PHYSICAL);
+
+                _accounts[id]->setDocument(TempDocument_);
+                _accounts[id]->setBalance(TempBalance_);
+                _accounts[id]->setName(TempName_);
+
+                return true;
+                break;
+            }
+
+            case AccountType::LEGAL:{
+                TempDocument_ = _accounts[id]->getDocument();
+                TempBalance_ = _accounts[id]->getBalance();
+                TempName_ = _accounts[id]->getName();
+                TempRegistrationStatus_ = getRegistrationStatusById(id);
+                TempOpeningDate_ = getOpeningDateById(id);
+
+                delete toDelete->second;
+                _accounts.erase(toDelete);
+                _accounts[id] = bank.create(AccountType::PREMIUM_LEGAL);
+
+                _accounts[id]->setDocument(TempDocument_);
+                _accounts[id]->setBalance(TempBalance_);
+                _accounts[id]->setName(TempName_);
+                setAccountRegistrationStatus(id, TempRegistrationStatus_);
+                setAccountOpeningDate(id, TempOpeningDate_);
+
+                return true;
+                break;
+            }
+
+            default:
+                return false;
+                break;
+            }
+            return true;
+        }
+        return false;
+    }
+    return false;
 }
